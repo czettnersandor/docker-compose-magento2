@@ -1,0 +1,22 @@
+version: '2'
+services:
+ db:
+   image: mysql:5.7
+   volumes:
+     - "./dev/data/db:/var/lib/mysql"
+   ports:
+     - "3306:3306"
+   environment:
+     MYSQL_ROOT_PASSWORD: myadmin
+     MYSQL_DATABASE: database
+     MYSQL_USER: myadmin
+     MYSQL_PASSWORD: myadmin
+
+ apache:
+   image: webdevops/php-apache-dev:alpine-3-php7
+   volumes:
+     - ".:/web"
+   ports:
+     - "80:80"
+   environment:
+     WEB_DOCUMENT_ROOT: /web
